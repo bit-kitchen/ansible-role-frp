@@ -1,17 +1,15 @@
 ---
 - name: Output frpc version
   debug:
-    var: frpc.stdout
+    msg: '{{ frpc.stdout|trim if frpc.stdout is defined else "Not Installed" }}'
   when:
   - install_frpc
-  - frpc.stdout is defined
 
 - name: Output frps version
   debug:
-    var: frps.stdout
+    msg: '{{ frps.stdout|trim if frps.stdout is defined else "Not Installed" }}'
   when:
   - install_frps
-  - frps.stdout is defined
 
 - name: Set facts
   set_fact:
