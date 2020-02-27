@@ -1,2 +1,16 @@
 ---
-# vars file for frp
+# ansible_system: Linux, Win32NT, CYGWIN_NT-10.0-18363
+system_map:
+  Linux: linux
+  Win32NT: windows
+os: "{{ system_map[ansible_system] if not ansible_system.startswith('CYGWIN') else 'windows' }}"
+
+# ansible_architecture: x86_64, 64-bit
+architecture_map:
+  x64_64: amd64
+  64-bit: amd64
+arch: "{{ architecture_map[ansible_architecture] | default('386') }}"
+
+release_name: frp_{{version}}_{{os}}_{{arch}}
+release_ext: "{{ 'tar.gz' if os == 'linux' else 'zip' }}"
+release_url: https://github.com/fatedier/frp/releases/download/v{{version}}/{{release_name}}.{{release_ext}}

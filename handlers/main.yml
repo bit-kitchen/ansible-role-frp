@@ -1,2 +1,29 @@
 ---
-# handlers file for frp
+# Linux
+- name: systemctl daemon-reload
+  become: yes
+  systemd:
+    daemon-reload: yes
+
+- name: restart frpc
+  become: yes
+  systemd:
+    name: frpc
+    state: restarted
+
+- name: restart frps
+  become: yes
+  systemd:
+    name: frps
+    state: restarted
+
+# Windows
+- name: win restart frpc
+  win_service:
+    name: frpc
+    state: restarted
+
+- name: win restart frps
+  win_service:
+    name: frps
+    state: restarted

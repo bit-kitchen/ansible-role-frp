@@ -1,0 +1,5 @@
+---
+tmp_dir: /tmp
+bin_dir: /usr/bin
+etc_dir: /etc
+systemd_dir: /usr/local/lib/systemd/system

@@ -1,5 +1,15 @@
+#!/usr/bin/env ansible-playbook
 ---
 - hosts: localhost
-  remote_user: root
+  gather_facts: yes
   roles:
-    - frp
+    - name: ../..
+      #version: "0.31.2"
+
+      #install_frpc: yes
+      #install_frps: yes
+      #configure_frpc: no
+      #configure_frps: no
+
+      #server_addr: '127.0.0.1'
+      #server_port: 7000

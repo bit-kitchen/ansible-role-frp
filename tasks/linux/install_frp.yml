@@ -1,0 +1,46 @@
+---
+- name: Install {{ component }} bin
+  become: yes
+  copy:
+    remote_src: yes
+    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
+    dest: '{{ bin_dir }}'
+    mode: '0755'
+  with_items:
+  - '{{ component }}'
+
+- name: Create frp config directory
+  become: yes
+  file:
+    path: '{{ etc_dir }}/frp'
+    state: directory
+    mode: '0755'
+
+- name: Install {{ component }} config
+  become: yes
+  copy:
+    remote_src: yes
+    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
+    dest: '{{ etc_dir }}/frp'
+    backup: yes
+  with_items:
+  - '{{ component }}.ini'
+  - '{{ component }}_full.ini'
+
+- name: Create systemd service directory
+  become: yes
+  file:
+    path: '{{ systemd_dir }}'
+    state: directory
+
+- name: Install {{ component }} systemd services
+  become: yes
+  copy:
+    remote_src: yes
+    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
+    dest: '{{ systemd_dir }}'
+  with_items:
+  - systemd/{{ component }}.service
+  - systemd/{{ component }}@.service
+  notify:
+  - systemctl daemon-reload

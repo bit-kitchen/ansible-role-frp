@@ -1,2 +1,8 @@
 ---
-# tasks file for frp
+- name: Include Linux Tasks
+  include_tasks: linux/main.yml
+  when: os == 'linux'
+
+- name: Include Windows Tasks
+  include_tasks: windows/main.yml
+  when: os == 'windows'

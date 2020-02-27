@@ -1,0 +1,19 @@
+---
+- name: Output frpc version
+  debug:
+    var: frpc.stdout
+  when:
+  - install_frpc
+  - frpc.stdout is defined
+
+- name: Output frps version
+  debug:
+    var: frps.stdout
+  when:
+  - install_frps
+  - frps.stdout is defined
+
+- name: Set facts
+  set_fact:
+    frpc_outdated: '{{ install_frpc and (frpc.stdout is not defined or frpc.stdout|trim != version) }}'
+    frps_outdated: '{{ install_frps and (frps.stdout is not defined or frps.stdout|trim != version) }}'

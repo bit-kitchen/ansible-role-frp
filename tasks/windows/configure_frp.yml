@@ -1,0 +1,11 @@
+- name: Configure {{ component }}
+  win_template:
+    src: '{{ component }}.ini'
+    dest: '{{ frp_dir }}\{{ component }}.ini'
+    backup: yes
+  notify: win restart {{ component }}
+
+- name: Configure {{ component }} service
+  win_service:
+    name: '{{ component }}'
+    start_mode: delayed

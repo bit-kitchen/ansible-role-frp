@@ -1,0 +1,42 @@
+---
+- name: Create frp directory
+  win_file:
+    path: '{{ frp_dir }}'
+    state: directory
+
+- name: Add frp directory to PATH
+  win_path:
+    elements: '{{ frp_dir }}'
+
+- name: Install {{ component }} exe
+  win_copy:
+    remote_src: yes
+    src: '{{ tmp_dir }}\{{ release_name }}\{{ item }}'
+    dest: '{{ frp_dir }}\{{ item }}'
+  with_items:
+  - '{{ component }}.exe'
+
+- name: Install {{ component }} ini
+  win_copy:
+    remote_src: yes
+    src: '{{ tmp_dir }}\{{ release_name }}\{{ item }}'
+    dest: '{{ frp_dir }}\{{ item }}'
+    backup: yes
+  with_items:
+  - '{{ component }}.ini'
+  - '{{ component }}_full.ini'
+
+- name: Create {{ component }} service
+  win_nssm:
+    name: '{{ component }}'
+    application: '{{ frp_dir }}\{{ component }}.exe'
+    arguments:
+    - -c
+    - '{{ frp_dir }}\{{ component }}.ini'
+    stdout_file: '{{ frp_dir }}\{{ component }}.log'
+    stderr_file: '{{ frp_dir }}\{{ component }}.log'
+
+- name: Configure {{ component }} service
+  win_service:
+    name: '{{ component }}'
+    start_mode: manual

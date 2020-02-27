@@ -1,0 +1,13 @@
+- name: Configure {{ component }}
+  become: yes
+  template:
+    src: '{{ component }}.ini'
+    dest: '{{ etc_dir }}/frp'
+    backup: yes
+  notify: restart {{ component }}
+
+- name: Configure {{ component }} service
+  become: yes
+  systemd:
+    name: '{{ component }}'
+    enabled: yes

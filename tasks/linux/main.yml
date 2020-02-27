@@ -1,0 +1,43 @@
+---
+- name: Include variables
+  include_vars: linux.yml
+
+- name: Check frpc version
+  command: frpc --version
+  register: frpc
+  when: install_frpc
+  changed_when: no
+  failed_when: no
+
+- name: Check frps version
+  command: frps --version
+  register: frps
+  when: install_frps
+  changed_when: no
+  failed_when: no
+
+- name: frp info
+  include_tasks: ../frp_info.yml
+
+- name: Download frp
+  unarchive:
+    remote_src: yes
+    src: "{{ release_url }}"
+    dest: "{{ tmp_dir }}"
+  when: frpc_outdated or frps_outdated
+
+- name: Include frpc installation
+  include: install_frp.yml component=frpc
+  when: frpc_outdated
+
+- name: Include frps installation
+  include: install_frp.yml component=frps
+  when: frps_outdated
+
+- name: Include frpc configuration
+  include: configure_frp.yml component=frpc
+  when: configure_frpc
+
+- name: Include frps configuration
+  include: configure_frp.yml component=frps
+  when: configure_frps
