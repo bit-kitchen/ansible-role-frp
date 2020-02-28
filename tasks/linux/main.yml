@@ -24,6 +24,8 @@
     remote_src: yes
     src: "{{ release_url }}"
     dest: "{{ tmp_dir }}"
+  environment:
+    https_proxy: '{{ http_proxy|default("") }}'
   when: frpc_outdated or frps_outdated
 
 - name: Include frpc installation
