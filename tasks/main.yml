@@ -1,7 +1,13 @@
 ---
+- name: Include Archlinux Tasks
+  include_tasks: archlinux/main.yml
+  when: ansible_os_family == 'Archlinux'
+
 - name: Include Linux Tasks
   include_tasks: linux/main.yml
-  when: os == 'linux'
+  when:
+  - ansible_os_family != 'Archlinux'
+  - os == 'linux'
 
 - name: Include Windows Tasks
   include_tasks: windows/main.yml

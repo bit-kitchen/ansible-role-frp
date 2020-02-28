@@ -12,6 +12,9 @@ galaxy_info:
   - name: Windows
     versions:
     - all
+  - name: ArchLinux
+    versions:
+    - any
   - name: GenericLinux
     versions:
     - any
