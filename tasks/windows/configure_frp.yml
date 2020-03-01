@@ -1,3 +1,14 @@
+- name: Create {{ frp_service_name }} service
+  win_nssm:
+    name: '{{ frp_service_name }}'
+    application: '{{ frp_dir }}\{{ component }}.exe'
+    arguments:
+    - -c
+    - '{{ frp_dir }}\{{ frp_config_name }}.ini'
+    stdout_file: '{{ frp_dir }}\{{ frp_config_name }}.log'
+    stderr_file: '{{ frp_dir }}\{{ frp_config_name }}.log'
+  when: frp_config_name is defined
+
 - name: Configure {{ frp_service_name }}
   win_template:
     src: '{{ component }}.ini'
