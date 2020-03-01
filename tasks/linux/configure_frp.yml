@@ -1,13 +1,13 @@
-- name: Configure {{ component }}
+- name: Configure {{ frp_service_name }}
   become: yes
   template:
     src: '{{ component }}.ini'
-    dest: '{{ frp_config_dir }}'
+    dest: '{{ frp_config_dir }}/{{ frp_config_name|default(component) }}.ini'
     backup: yes
   notify: restart {{ component }}
 
-- name: Configure {{ component }} service
+- name: Configure {{ frp_service_name }} service
   become: yes
   systemd:
-    name: '{{ component }}'
+    name: '{{ frp_service_name }}'
     enabled: yes

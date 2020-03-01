@@ -1,11 +1,11 @@
-- name: Configure {{ component }}
+- name: Configure {{ frp_service_name }}
   win_template:
     src: '{{ component }}.ini'
-    dest: '{{ frp_config_dir }}\{{ component }}.ini'
+    dest: '{{ frp_config_dir }}\{{ frp_config_name|default(component) }}.ini'
     backup: yes
   notify: win restart {{ component }}
 
-- name: Configure {{ component }} service
+- name: Configure {{ frp_service_name }} service
   win_service:
-    name: '{{ component }}'
+    name: '{{ frp_service_name }}'
     start_mode: delayed

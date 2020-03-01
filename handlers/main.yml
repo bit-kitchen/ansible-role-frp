@@ -8,22 +8,22 @@
 - name: restart frpc
   become: yes
   systemd:
-    name: frpc
+    name: '{{ frpc_service_name }}'
     state: restarted
 
 - name: restart frps
   become: yes
   systemd:
-    name: frps
+    name: '{{ frps_service_name }}'
     state: restarted
 
 # Windows
 - name: win restart frpc
   win_service:
-    name: frpc
+    name: '{{ frpc_service_name }}'
     state: restarted
 
 - name: win restart frps
   win_service:
-    name: frps
+    name: '{{ frps_service_name }}'
     state: restarted
