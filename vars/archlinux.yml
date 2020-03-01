@@ -1,2 +1,2 @@
 ---
-frp_etc_dir: /etc
+frp_config_dir: /etc/frp

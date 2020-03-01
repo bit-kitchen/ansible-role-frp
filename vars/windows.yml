@@ -1,3 +1,4 @@
 ---
 frp_tmp_dir: '{{ ansible_env.TEMP }}'
 frp_dir: '{{ ansible_env.SystemDrive }}\frp'
+frp_config_dir: '{{ frp_dir }}'

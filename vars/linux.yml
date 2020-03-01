@@ -1,5 +1,5 @@
 ---
 frp_tmp_dir: /tmp
 frp_bin_dir: /usr/bin
-frp_etc_dir: /etc
+frp_config_dir: /etc/frp
 frp_systemd_dir: /usr/local/lib/systemd/system

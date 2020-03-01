@@ -12,7 +12,7 @@
 - name: Create frp config directory
   become: yes
   file:
-    path: '{{ frp_etc_dir }}/frp'
+    path: '{{ frp_config_dir }}'
     state: directory
     mode: '0755'
 
@@ -21,7 +21,7 @@
   copy:
     remote_src: yes
     src: '{{ frp_tmp_dir }}/{{ frp_release_name }}/{{ item }}'
-    dest: '{{ frp_etc_dir }}/frp'
+    dest: '{{ frp_config_dir }}'
     backup: yes
   with_items:
   - '{{ component }}.ini'
