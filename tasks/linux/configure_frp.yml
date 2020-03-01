@@ -2,7 +2,7 @@
   become: yes
   template:
     src: '{{ component }}.ini'
-    dest: '{{ etc_dir }}/frp'
+    dest: '{{ frp_etc_dir }}/frp'
     backup: yes
   notify: restart {{ component }}
 

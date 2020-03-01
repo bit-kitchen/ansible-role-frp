@@ -1,16 +1,16 @@
 ---
 # ansible_system: Linux, Win32NT, CYGWIN_NT-10.0-18363
-system_map:
+frp_system_map:
   Linux: linux
   Win32NT: windows
-os: "{{ system_map[ansible_system] if not ansible_system.startswith('CYGWIN') else 'windows' }}"
+frp_os: "{{ frp_system_map[ansible_system] if not ansible_system.startswith('CYGWIN') else 'windows' }}"
 
 # ansible_architecture: x86_64, 64-bit
-architecture_map:
+frp_architecture_map:
   x64_64: amd64
   64-bit: amd64
-arch: "{{ architecture_map[ansible_architecture] | default('386') }}"
+frp_arch: "{{ frp_architecture_map[ansible_architecture] | default('386') }}"
 
-release_name: frp_{{version}}_{{os}}_{{arch}}
-release_ext: "{{ 'tar.gz' if os == 'linux' else 'zip' }}"
-release_url: https://github.com/fatedier/frp/releases/download/v{{version}}/{{release_name}}.{{release_ext}}
+frp_release_name: frp_{{frp_version}}_{{frp_os}}_{{frp_arch}}
+frp_release_ext: "{{ 'tar.gz' if frp_os == 'linux' else 'zip' }}"
+frp_release_url: https://github.com/fatedier/frp/releases/download/v{{frp_version}}/{{frp_release_name}}.{{frp_release_ext}}

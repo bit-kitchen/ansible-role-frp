@@ -21,14 +21,14 @@
 
 - name: Download frp
   win_get_url:
-    url: '{{ release_url }}'
-    dest: '{{ tmp_dir }}\{{ release_name }}.{{ release_ext }}'
+    url: '{{ frp_release_url }}'
+    dest: '{{ frp_tmp_dir }}\{{ frp_release_name }}.{{ frp_release_ext }}'
   when: frpc_outdated or frps_outdated
 
 - name: Unzip frp
   win_unzip:
-    src: '{{ tmp_dir }}\{{ release_name }}.{{ release_ext }}'
-    dest: '{{ tmp_dir }}'
+    src: '{{ frp_tmp_dir }}\{{ frp_release_name }}.{{ frp_release_ext }}'
+    dest: '{{ frp_tmp_dir }}'
     delete_archive: yes
   when: frpc_outdated or frps_outdated
 

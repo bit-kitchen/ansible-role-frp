@@ -13,5 +13,5 @@
 
 - name: Set facts
   set_fact:
-    frpc_outdated: '{{ install_frpc and (frpc.stdout is not defined or frpc.stdout|trim != version) }}'
-    frps_outdated: '{{ install_frps and (frps.stdout is not defined or frps.stdout|trim != version) }}'
+    frpc_outdated: '{{ install_frpc and (frpc.stdout is not defined or frpc.stdout|trim != frp_version) }}'
+    frps_outdated: '{{ install_frps and (frps.stdout is not defined or frps.stdout|trim != frp_version) }}'

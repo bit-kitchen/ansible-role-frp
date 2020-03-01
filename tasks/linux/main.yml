@@ -22,10 +22,10 @@
 - name: Download frp
   unarchive:
     remote_src: yes
-    src: "{{ release_url }}"
-    dest: "{{ tmp_dir }}"
+    src: "{{ frp_release_url }}"
+    dest: "{{ frp_tmp_dir }}"
   environment:
-    https_proxy: '{{ http_proxy|default("") }}'
+    https_proxy: '{{ frp_http_proxy|default("") }}'
   when: frpc_outdated or frps_outdated
 
 - name: Include frpc installation

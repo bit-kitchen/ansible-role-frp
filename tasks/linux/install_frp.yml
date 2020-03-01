@@ -3,8 +3,8 @@
   become: yes
   copy:
     remote_src: yes
-    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
-    dest: '{{ bin_dir }}'
+    src: '{{ frp_tmp_dir }}/{{ frp_release_name }}/{{ item }}'
+    dest: '{{ frp_bin_dir }}'
     mode: '0755'
   with_items:
   - '{{ component }}'
@@ -12,7 +12,7 @@
 - name: Create frp config directory
   become: yes
   file:
-    path: '{{ etc_dir }}/frp'
+    path: '{{ frp_etc_dir }}/frp'
     state: directory
     mode: '0755'
 
@@ -20,8 +20,8 @@
   become: yes
   copy:
     remote_src: yes
-    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
-    dest: '{{ etc_dir }}/frp'
+    src: '{{ frp_tmp_dir }}/{{ frp_release_name }}/{{ item }}'
+    dest: '{{ frp_etc_dir }}/frp'
     backup: yes
   with_items:
   - '{{ component }}.ini'
@@ -30,15 +30,15 @@
 - name: Create systemd service directory
   become: yes
   file:
-    path: '{{ systemd_dir }}'
+    path: '{{ frp_systemd_dir }}'
     state: directory
 
 - name: Install {{ component }} systemd services
   become: yes
   copy:
     remote_src: yes
-    src: '{{ tmp_dir }}/{{ release_name }}/{{ item }}'
-    dest: '{{ systemd_dir }}'
+    src: '{{ frp_tmp_dir }}/{{ frp_release_name }}/{{ item }}'
+    dest: '{{ frp_systemd_dir }}'
   with_items:
   - systemd/{{ component }}.service
   - systemd/{{ component }}@.service

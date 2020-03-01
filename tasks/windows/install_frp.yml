@@ -11,7 +11,7 @@
 - name: Install {{ component }} exe
   win_copy:
     remote_src: yes
-    src: '{{ tmp_dir }}\{{ release_name }}\{{ item }}'
+    src: '{{ frp_tmp_dir }}\{{ frp_release_name }}\{{ item }}'
     dest: '{{ frp_dir }}\{{ item }}'
   with_items:
   - '{{ component }}.exe'
@@ -19,7 +19,7 @@
 - name: Install {{ component }} ini
   win_copy:
     remote_src: yes
-    src: '{{ tmp_dir }}\{{ release_name }}\{{ item }}'
+    src: '{{ frp_tmp_dir }}\{{ frp_release_name }}\{{ item }}'
     dest: '{{ frp_dir }}\{{ item }}'
     backup: yes
   with_items:
