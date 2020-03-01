@@ -1,8 +1,6 @@
 [linux]
-localhost
 
 [windows]
-#localhost
 
 [windows:vars]
 #ansible_user=Administrator
