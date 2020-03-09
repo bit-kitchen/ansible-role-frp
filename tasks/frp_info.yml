@@ -3,13 +3,13 @@
   debug:
     msg: '{{ frpc.stdout|trim if frpc.stdout is defined else "Not Installed" }}'
   when:
-  - install_frpc
+  - frpc_install
 
 - name: Output frps version
   debug:
     msg: '{{ frps.stdout|trim if frps.stdout is defined else "Not Installed" }}'
   when:
-  - install_frps
+  - frps_install
 
 - name: Check frp latest version
   uri:
@@ -24,5 +24,5 @@
 
 - name: Check frp outdated
   set_fact:
-    frpc_outdated: '{{ install_frpc and (frpc.stdout is not defined or frpc.stdout|trim != frp_version) }}'
-    frps_outdated: '{{ install_frps and (frps.stdout is not defined or frps.stdout|trim != frp_version) }}'
+    frpc_outdated: '{{ frpc_install and (frpc.stdout is not defined or frpc.stdout|trim != frp_version) }}'
+    frps_outdated: '{{ frps_install and (frps.stdout is not defined or frps.stdout|trim != frp_version) }}'

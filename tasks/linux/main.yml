@@ -5,14 +5,14 @@
 - name: Check frpc version
   command: frpc --version
   register: frpc
-  when: install_frpc
+  when: frpc_install
   changed_when: no
   failed_when: no
 
 - name: Check frps version
   command: frps --version
   register: frps
-  when: install_frps
+  when: frps_install
   changed_when: no
   failed_when: no
 
@@ -38,8 +38,8 @@
 
 - name: Include frpc configuration
   include: configure_frp.yml component=frpc
-  when: configure_frpc
+  when: frpc_configure
 
 - name: Include frps configuration
   include: configure_frp.yml component=frps
-  when: configure_frps
+  when: frps_configure

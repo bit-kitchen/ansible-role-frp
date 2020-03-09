@@ -5,17 +5,17 @@
 - name: Install frpc
   aur:
     name: frpc
-  when: install_frpc
+  when: frpc_install
 
 - name: Install frps
   aur:
     name: frps
-  when: install_frps
+  when: frps_install
 
 - name: Include frpc configuration
   include: ../linux/configure_frp.yml component=frpc
-  when: configure_frpc
+  when: frpc_configure
 
 - name: Include frps configuration
   include: ../linux/configure_frp.yml component=frps
-  when: configure_frps
+  when: frps_configure
