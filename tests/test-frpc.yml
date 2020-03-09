@@ -3,13 +3,8 @@
 - hosts: localhost
   gather_facts: yes
   roles:
-    - name: ../..
+    - name: ../../frpc
       #frp_version: ""
-
-      #install_frpc: yes
-      #install_frps: yes
-      #configure_frpc: no
-      #configure_frps: no
 
       #frp_config_name: ''
       #frp_server_addr: '127.0.0.1'

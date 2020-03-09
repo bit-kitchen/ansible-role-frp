@@ -1,11 +1,6 @@
 ---
 #frp_version: ''
 
-install_frpc: yes
-install_frps: yes
-configure_frpc: no
-configure_frps: no
-
 #frp_config_name: ''
 frp_server_addr: '127.0.0.1'
 frp_server_port: 7000

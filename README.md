@@ -1,9 +1,10 @@
 ansible-role-frp
 ================
 
-Install and optionally configure [frp](https://github.com/fatedier/frp) client and/or server.
+Install and configure [frp](https://github.com/fatedier/frp) client or server.
 
-    ansible-galaxy install bit_kitchen.frp
+    ansible-galaxy install bit_kitchen.frpc
+    ansible-galaxy install bit_kitchen.frps
 
 Requirements
 ------------
@@ -23,9 +24,13 @@ Dependencies
 Example Playbook
 ----------------
 
+    - hosts: clients
+      roles:
+        - bit_kitchen.frpc
+
     - hosts: servers
       roles:
-        - bit_kitchen.frp
+        - bit_kitchen.frps
 
 License
 -------

@@ -1,0 +1,13 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: localhost
+  gather_facts: yes
+  roles:
+    - name: ../../frps
+      #frp_version: ""
+
+      #frp_config_name: ''
+      #frp_server_addr: '127.0.0.1'
+      #frp_server_port: 7000
+      #frp_token: ''
+      #frp_http_proxy: ''

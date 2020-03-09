@@ -1,6 +1,5 @@
 galaxy_info:
   author: bit_kitchen
-  role_name: frp
 
   description: Install and configure frp on Linux or Windows
   license: MIT
