@@ -1,5 +1,5 @@
 ---
-frp_version: '0.31.2'
+#frp_version: ''
 
 install_frpc: yes
 install_frps: yes

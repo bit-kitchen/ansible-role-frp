@@ -11,7 +11,18 @@
   when:
   - install_frps
 
-- name: Set facts
+- name: Check frp latest version
+  uri:
+    url: https://api.github.com/repos/fatedier/frp/releases/latest
+  register: frp_version_latest
+  when: frp_version is not defined
+
+- name: Set frp latest version
+  set_fact:
+    frp_version: '{{ frp_version_latest.json.name.replace("v", "") }}'
+  when: frp_version is not defined
+
+- name: Check frp outdated
   set_fact:
     frpc_outdated: '{{ install_frpc and (frpc.stdout is not defined or frpc.stdout|trim != frp_version) }}'
     frps_outdated: '{{ install_frps and (frps.stdout is not defined or frps.stdout|trim != frp_version) }}'
