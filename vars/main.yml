@@ -23,6 +23,6 @@ frp_release_name: frp_{{frp_version}}_{{frp_os}}_{{frp_arch}}
 frp_release_ext: "{{ 'tar.gz' if frp_os == 'linux' else 'zip' }}"
 frp_release_url: https://github.com/fatedier/frp/releases/download/v{{frp_version}}/{{frp_release_name}}.{{frp_release_ext}}
 
-frp_service_name: "{{ component }}{{ '@'+frp_config_name if frp_config_name is defined else '' }}"
+frp_service_name: "{{ component }}{{ '@'+frp_config_name if frp_config_name != '' else '' }}"
 frpc_service_name: "frpc{{ '@'+frpc_config_name if frpc_config_name is defined else '' }}"
 frps_service_name: "frps{{ '@'+frpc_config_name if frpc_config_name is defined else '' }}"
