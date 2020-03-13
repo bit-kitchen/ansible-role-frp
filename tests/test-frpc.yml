@@ -4,10 +4,10 @@
   gather_facts: yes
   roles:
     - name: ../../frpc
-      #frp_version: ""
+      #frpc_version: ""
 
-      #frp_config_name: ''
-      #frp_server_addr: '127.0.0.1'
-      #frp_server_port: 7000
-      #frp_token: ''
-      #frp_http_proxy: ''
+      #frpc_config_name: ''
+      #frpc_server_addr: '127.0.0.1'
+      #frpc_server_port: 7000
+      #frpc_token: ''
+      #frpc_http_proxy: ''
