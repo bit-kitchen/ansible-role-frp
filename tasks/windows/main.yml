@@ -16,6 +16,15 @@
   changed_when: no
   failed_when: no
 
+- name: Check frp latest version
+  win_uri:
+    url: https://api.github.com/repos/fatedier/frp/releases/latest
+    # return_content is required even though we're using JSON only.
+    # Note that uri module does not requrie this.
+    return_content: yes
+  register: frp_version_latest
+  when: frp_version == ""
+
 - name: frp info
   include_tasks: ../frp_info.yml
 

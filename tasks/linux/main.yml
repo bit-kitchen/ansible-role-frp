@@ -16,6 +16,12 @@
   changed_when: no
   failed_when: no
 
+- name: Check frp latest version
+  uri:
+    url: https://api.github.com/repos/fatedier/frp/releases/latest
+  register: frp_version_latest
+  when: frp_version == ""
+
 - name: frp info
   include_tasks: ../frp_info.yml
 
