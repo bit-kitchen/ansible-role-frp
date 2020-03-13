@@ -1,4 +1,11 @@
 ---
+- name: Stop {{ component }} service before install
+  win_service:
+    name: '{{ component }}'
+    state: stopped
+  # Task may fail as the service may have not been installed
+  failed_when: no
+
 - name: Create frp directory
   win_file:
     path: '{{ frp_dir }}'
