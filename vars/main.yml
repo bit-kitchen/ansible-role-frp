@@ -15,6 +15,7 @@ frp_architecture_map:
 frp_arch: "{{ frp_architecture_map[ansible_architecture] | default('386') }}"
 
 frp_config_name: "{% if frpc_config_name is defined %}{{ frpc_config_name }}{% elif frps_config_name is defined %}{{ frps_config_name }}{% endif %}"
+frp_config_file: "{% if frpc_config_file is defined %}{{ frpc_config_file }}{% elif frps_config_file is defined %}{{ frps_config_file }}{% endif %}"
 frp_version: "{% if frpc_version is defined %}{{ frpc_version }}{% elif frps_version is defined %}{{ frps_version }}{% endif %}"
 
 frp_release_name: frp_{{frp_version}}_{{frp_os}}_{{frp_arch}}
