@@ -51,8 +51,8 @@
 
 - name: Include frpc configuration
   include: configure_frp.yml component=frpc
-  when: frpc_configure
+  when: frpc_install
 
 - name: Include frps configuration
   include: configure_frp.yml component=frps
-  when: frps_configure
+  when: frps_install
