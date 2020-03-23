@@ -22,6 +22,7 @@
     # return_content is required even though we're using JSON only.
     # Note that uri module does not requrie this.
     return_content: yes
+    proxy_url: '{{ frpc_http_proxy|default("") }}'
   register: frp_version_latest
   when: frp_version == ""
 
@@ -32,6 +33,7 @@
   win_get_url:
     url: '{{ frp_release_url }}'
     dest: '{{ frp_tmp_dir }}\{{ frp_release_name }}.{{ frp_release_ext }}'
+    proxy_url: '{{ frpc_http_proxy|default("") }}'
   when: frpc_outdated or frps_outdated
 
 - name: Unzip frp

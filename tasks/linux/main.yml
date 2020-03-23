@@ -19,6 +19,8 @@
 - name: Check frp latest version
   uri:
     url: https://api.github.com/repos/fatedier/frp/releases/latest
+  environment:
+    https_proxy: '{{ frpc_http_proxy|default("") }}'
   register: frp_version_latest
   when: frp_version == ""
 
@@ -31,7 +33,7 @@
     src: "{{ frp_release_url }}"
     dest: "{{ frp_tmp_dir }}"
   environment:
-    https_proxy: '{{ frp_http_proxy|default("") }}'
+    https_proxy: '{{ frpc_http_proxy|default("") }}'
   when: frpc_outdated or frps_outdated
 
 - name: Include frpc installation
