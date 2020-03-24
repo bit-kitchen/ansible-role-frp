@@ -18,9 +18,12 @@ install:
   # Check ansible version
   - ansible --version
 
+  # Install role dependencies
+  - ansible-galaxy install -r requirements.yml
+
 script:
   # Basic role syntax check
-  - ansible-playbook tests/test.yml --syntax-check
+  - ansible-playbook tests/test-frpc.yml --syntax-check || ansible-playbook tests/test-frps.yml --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
