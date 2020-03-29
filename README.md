@@ -54,61 +54,69 @@ Example Playbook
 
 ### Install and configure frp using defaults
 
-    - hosts: servers
-      roles:
-        - bit_kitchen.frps
+```yml
+- hosts: servers
+  roles:
+  - bit_kitchen.frps
 
-    - hosts: clients
-      roles:
-        - bit_kitchen.frpc
+- hosts: clients
+  roles:
+  - bit_kitchen.frpc
+```
 
 ### Install and configure frp using existing config files
 
-    - hosts: servers
-      roles:
-        - role: bit_kitchen.frps
-          frps_config_file: /path/to/my/frps.ini
+```yml
+- hosts: servers
+  roles:
+  - role: bit_kitchen.frps
+    frps_config_file: /path/to/my/frps.ini
 
-    - hosts: clients
-      roles:
-        - role: bit_kitchen.frpc
-          frpc_config_file: /path/to/my/frpc.ini
+- hosts: clients
+  roles:
+  - role: bit_kitchen.frpc
+    frpc_config_file: /path/to/my/frpc.ini
+```
 
 ### Install and configure frp using variables
 
-    - hosts: servers
-      roles:
-        - role: bit_kitchen.frps
-          frps_bind_port: 7000
-          frps_token: MySecretToken
+```yml
+- hosts: servers
+  roles:
+  - role: bit_kitchen.frps
+    frps_bind_port: 7000
+    frps_token: MySecretToken
 
-    - hosts: clients
-      roles:
-        - role: bit_kitchen.frpc
-          frpc_server_addr: frp.example.com
-          frpc_token: MySecretToken
+- hosts: clients
+  roles:
+  - role: bit_kitchen.frpc
+    frpc_server_addr: frp.example.com
+    frpc_token: MySecretToken
+```
 
 ### Install and configure two instances of frp
 
-    - hosts: servers
-      roles:
-        - role: bit_kitchen.frps
-          frps_config_name: server1
-          frps_config_file: /path/to/my/frps-1.ini
+```yml
+- hosts: servers
+  roles:
+  - role: bit_kitchen.frps
+    frps_config_name: server1
+    frps_config_file: /path/to/my/frps-1.ini
 
-        - role: bit_kitchen.frps
-          frps_config_name: server2
-          frps_config_file: /path/to/my/frps-2.ini
+  - role: bit_kitchen.frps
+    frps_config_name: server2
+    frps_config_file: /path/to/my/frps-2.ini
 
-    - hosts: clients
-      roles:
-        - role: bit_kitchen.frpc
-          frpc_config_name: client1
-          frpc_config_file: /path/to/my/frpc-1.ini
+- hosts: clients
+  roles:
+  - role: bit_kitchen.frpc
+    frpc_config_name: client1
+    frpc_config_file: /path/to/my/frpc-1.ini
 
-        - role: bit_kitchen.frpc
-          frpc_config_name: client2
-          frpc_config_file: /path/to/my/frpc-2.ini
+  - role: bit_kitchen.frpc
+    frpc_config_name: client2
+    frpc_config_file: /path/to/my/frpc-2.ini
+```
 
 
 License
