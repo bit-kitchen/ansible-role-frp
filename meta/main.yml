@@ -24,5 +24,7 @@ galaxy_info:
   - frps
 
 dependencies:
-- bit_kitchen.nssm
-- kewlfft.aur
+- role: bit_kitchen.nssm
+  when: frp_os == 'windows'
+- role: kewlfft.aur
+  when: ansible_os_family == 'Archlinux'
