@@ -8,6 +8,7 @@
   - name: Install frpc
     aur:
       name: frpc
+      state: latest
 
   - name: Include frpc configuration
     include: ../linux/configure_frp.yml component=frpc
@@ -18,6 +19,7 @@
   - name: Install frps
     aur:
       name: frps
+      state: latest
     when: frps_install
 
   - name: Include frps configuration

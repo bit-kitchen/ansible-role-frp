@@ -1,2 +1,3 @@
 - bit_kitchen.nssm
-- kewlfft.aur
+- name: kewlfft.aur
+  version: v0.30
