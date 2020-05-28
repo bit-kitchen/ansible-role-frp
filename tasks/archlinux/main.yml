@@ -20,8 +20,6 @@
     aur:
       name: frps
       state: latest
-    when: frps_install
 
   - name: Include frps configuration
     include: ../linux/configure_frp.yml component=frps
-    when: frps_install
