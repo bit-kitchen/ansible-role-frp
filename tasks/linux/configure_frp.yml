@@ -21,3 +21,4 @@
   systemd:
     name: '{{ frp_service_name }}'
     enabled: yes
+    daemon_reload: yes

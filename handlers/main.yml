@@ -1,10 +1,5 @@
 ---
 # Linux
-- name: systemctl daemon-reload
-  become: yes
-  systemd:
-    daemon-reload: yes
-
 - name: restart frpc
   become: yes
   systemd:

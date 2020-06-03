@@ -42,5 +42,3 @@
   with_items:
   - systemd/{{ component }}.service
   - systemd/{{ component }}@.service
-  notify:
-  - systemctl daemon-reload
