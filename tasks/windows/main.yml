@@ -1,5 +1,5 @@
 ---
-- name: Include variables
+- name: Include Windows variables
   include_vars: windows.yml
 
 - name: Check frpc version

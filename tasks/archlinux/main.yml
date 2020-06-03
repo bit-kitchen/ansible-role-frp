@@ -1,5 +1,5 @@
 ---
-- name: Include variables
+- name: Include Arch Linux variables
   include_vars: archlinux.yml
 
 - name: frpc

@@ -1,5 +1,5 @@
 ---
-- name: Include variables
+- name: Include Linux variables
   include_vars: linux.yml
 
 - name: Check frpc version
