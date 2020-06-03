@@ -2,17 +2,9 @@
 - name: Include Linux variables
   include_vars: linux.yml
 
-- name: Check frpc version
-  command: frpc --version
-  register: frpc
-  when: frpc_install
-  changed_when: no
-  failed_when: no
-
-- name: Check frps version
-  command: frps --version
-  register: frps
-  when: frps_install
+- name: Check {{ frp }} version
+  command: "{{ frp }} --version"
+  register: frp_version_installed
   changed_when: no
   failed_when: no
 
@@ -34,20 +26,11 @@
     dest: "{{ frp_tmp_dir }}"
   environment:
     https_proxy: '{{ frpc_http_proxy|default("") }}'
-  when: frpc_outdated or frps_outdated
+  when: frp_outdated
 
-- name: Include frpc installation
-  include: install_frp.yml component=frpc
-  when: frpc_outdated
+- name: Include {{ frp }} installation
+  include: install_frp.yml component={{ frp }}
+  when: frp_outdated
 
-- name: Include frps installation
-  include: install_frp.yml component=frps
-  when: frps_outdated
-
-- name: Include frpc configuration
-  include: configure_frp.yml component=frpc
-  when: frpc_install
-
-- name: Include frps configuration
-  include: configure_frp.yml component=frps
-  when: frps_install
+- name: Include {{ frp }} configuration
+  include: configure_frp.yml component={{ frp }}

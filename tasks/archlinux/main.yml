@@ -2,24 +2,10 @@
 - name: Include Arch Linux variables
   include_vars: archlinux.yml
 
-- name: frpc
-  when: frpc_install
-  block:
-  - name: Install frpc
-    aur:
-      name: frpc
-      state: latest
+- name: Install {{ frp }}
+  aur:
+    name: "{{ frp }}"
+    state: latest
 
-  - name: Include frpc configuration
-    include: ../linux/configure_frp.yml component=frpc
-
-- name: frps
-  when: frps_install
-  block:
-  - name: Install frps
-    aur:
-      name: frps
-      state: latest
-
-  - name: Include frps configuration
-    include: ../linux/configure_frp.yml component=frps
+- name: Include {{ frp }} configuration
+  include: ../linux/configure_frp.yml component={{ frp }}

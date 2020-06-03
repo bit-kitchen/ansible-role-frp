@@ -1,6 +1,5 @@
 ---
-frpc_install: "{{ role_name.endswith('frpc') }}"
-frps_install: "{{ role_name.endswith('frps') }}"
+frp: "{{ 'frpc' if role_name.endswith('frpc') else 'frps' }}"
 
 # ansible_system: Linux, Win32NT, CYGWIN_NT-10.0-18363
 frp_system_map:

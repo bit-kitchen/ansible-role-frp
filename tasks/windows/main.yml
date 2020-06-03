@@ -2,17 +2,9 @@
 - name: Include Windows variables
   include_vars: windows.yml
 
-- name: Check frpc version
-  win_command: '{{ frp_dir }}\frpc.exe --version'
-  register: frpc
-  when: frpc_install
-  changed_when: no
-  failed_when: no
-
-- name: Check frps version
-  win_command: '{{ frp_dir }}\frps.exe --version'
-  register: frps
-  when: frps_install
+- name: Check {{ frp }} version
+  win_command: '{{ frp_dir }}\{{ frp }}.exe --version'
+  register: frp_version_installed
   changed_when: no
   failed_when: no
 
@@ -34,27 +26,17 @@
     url: '{{ frp_release_url }}'
     dest: '{{ frp_tmp_dir }}\{{ frp_release_name }}.{{ frp_release_ext }}'
     proxy_url: '{{ frpc_http_proxy|default("") }}'
-  when: frpc_outdated or frps_outdated
+  when: frp_outdated
 
 - name: Unzip frp
   win_unzip:
     src: '{{ frp_tmp_dir }}\{{ frp_release_name }}.{{ frp_release_ext }}'
     dest: '{{ frp_tmp_dir }}'
     delete_archive: yes
-  when: frpc_outdated or frps_outdated
+  when: frp_outdated
 
-- name: Include frpc installation
-  include: install_frp.yml component=frpc
-  when: frpc_outdated
+- name: Include {{ frp }} installation
+  include: install_frp.yml component={{ frp }}
 
-- name: Include frps installation
-  include: install_frp.yml component=frps
-  when: frps_outdated
-
-- name: Include frpc configuration
-  include: configure_frp.yml component=frpc
-  when: frpc_install
-
-- name: Include frps configuration
-  include: configure_frp.yml component=frps
-  when: frps_install
+- name: Include {{ frp }} configuration
+  include: configure_frp.yml component={{ frp }}
