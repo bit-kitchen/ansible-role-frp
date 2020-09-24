@@ -6,6 +6,7 @@
     src: '{{ frp_tmp_dir }}/{{ frp_release_name }}/{{ item }}'
     dest: '{{ frp_bin_dir }}'
     mode: '0755'
+  notify: restart {{ component }}
   with_items:
   - '{{ component }}'
 

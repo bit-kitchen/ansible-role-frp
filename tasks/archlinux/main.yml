@@ -6,6 +6,7 @@
   aur:
     name: "{{ frp }}"
     state: latest
+  notify: restart {{ frp }}
 
 - name: Include {{ frp }} configuration
   include: ../linux/configure_frp.yml component={{ frp }}

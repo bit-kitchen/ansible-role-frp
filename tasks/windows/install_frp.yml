@@ -20,6 +20,7 @@
     remote_src: yes
     src: '{{ frp_tmp_dir }}\{{ frp_release_name }}\{{ item }}'
     dest: '{{ frp_dir }}\{{ item }}'
+  notify: win restart {{ component }}
   with_items:
   - '{{ component }}.exe'
 
