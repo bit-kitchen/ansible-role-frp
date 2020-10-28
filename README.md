@@ -53,7 +53,8 @@ frps_token       | Optional          | (undefined) | frp token used for authenti
 Dependencies
 ------------
 
-* `bit_kitchen.nssm`: used for service creation on Windows.
+* `bit_kitchen.nssm`: (Required for Windows only) used for service creation on Windows.
+* `kewlfft.aur`: (Required for Arch Linux only) used for AUR support.
 
 Example Playbook
 ----------------
