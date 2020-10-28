@@ -7,8 +7,11 @@
   include_tasks: linux/main.yml
   when:
   - ansible_os_family != 'Archlinux'
-  - frp_os == 'linux'
+  - ansible_system is defined
+  - ansible_system == 'Linux'
 
 - name: Include Windows Tasks
   include_tasks: windows/main.yml
-  when: frp_os == 'windows'
+  when:
+  - ansible_system is defined
+  - ansible_system == 'Win32NT' or ansible_system.startswith('CYGWIN')
