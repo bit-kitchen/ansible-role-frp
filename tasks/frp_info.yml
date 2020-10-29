@@ -7,7 +7,7 @@
 - name: Output {{ frp }} version
   debug:
     msg:
-    - 'Installed version: {{ frp_version_installed.stdout|default("Not Installed")|trim }}'
+    - 'Installed version: {{ frp_version_installed.stdout|default("Not Installed", True)|trim }}'
     - 'Target version: {{ frp_version }}'
 
 - name: Check frp outdated

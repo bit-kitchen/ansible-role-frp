@@ -1,5 +1,7 @@
 [linux]
 
+[openwrt]
+
 [windows]
 
 [windows:vars]

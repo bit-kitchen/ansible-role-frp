@@ -1,7 +1,7 @@
 galaxy_info:
   author: bit_kitchen
 
-  description: Install and configure frp on Linux or Windows
+  description: Install and configure frp on Windows, Linux or OpenWrt
   license: MIT
 
   min_ansible_version: 2.9
@@ -25,5 +25,7 @@ galaxy_info:
 
 dependencies:
 - role: bit_kitchen.nssm
+- role: gekmihesg.openwrt
+  openwrt_install_recommended_packages: no
 - role: kewlfft.aur
   version: v0.30

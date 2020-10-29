@@ -1,0 +1,35 @@
+---
+- name: Copy frpc config file
+  copy:
+    src: '{{ frp_config_file }}'
+    dest: /etc/config/frpc
+    backup: yes
+  notify: openwrt restart frpc
+  when: frp_config_file != ''
+
+- name: Configure frpc
+  uci:
+    command: set
+    key: frpc.frps
+    value:
+      server_addr: "{{ frpc_server_addr }}"
+      server_port: "{{ frpc_server_port }}"
+      token: "{{ frpc_token|default('') }}"
+  notify:
+  - uci commit
+  - openwrt restart frpc
+  when: frp_config_file == ''
+
+- name: Configure frpc service
+  uci:
+    command: set
+    key: frpc.main
+    value:
+      enabled: "1"
+      enabled_logging: "1"
+      log_level: "info"
+      http_proxy: "{{ frpc_http_proxy|default('') }}"
+  notify:
+  - uci commit
+  - openwrt restart frpc
+  when: frp_config_file == ''

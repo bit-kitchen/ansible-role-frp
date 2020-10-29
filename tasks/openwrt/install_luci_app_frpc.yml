@@ -1,0 +1,30 @@
+---
+- name: Check luci-app-frpc installed version
+  shell: "opkg info luci-app-frpc | grep Version: | cut -d' ' -f2"
+  register: luci_app_frpc_version_installed
+  changed_when: no
+  failed_when: no
+
+- name: Check luci-app-frpc latest version
+  shell: wget -O- 'http://api.github.com/repos/kuoruan/luci-app-frpc/releases/latest' |
+    grep -Eo '"tag_name":"[^"]+"' |
+    grep -Eo '[-0-9.]+'
+  register: luci_app_frpc_version_latest
+  changed_when: no
+
+- name: Output luci-app-frpc version
+  debug:
+    msg:
+    - 'Installed version: {{ luci_app_frpc_version_installed.stdout|default("Not Installed", True)|trim }}'
+    - 'Latest version: {{ luci_app_frpc_version_latest.stdout }}'
+
+- name: Download luci-app-frpc ipk
+  shell: wget 'http://github.com/kuoruan/luci-app-frpc/releases/download/v{{ luci_app_frpc_version_latest.stdout }}/luci-app-frpc_{{ luci_app_frpc_version_latest.stdout }}_all.ipk'
+    -O '/tmp/luci-app-frpc_{{ luci_app_frpc_version_latest.stdout }}_all.ipk'
+  args:
+    creates: /tmp/luci-app-frpc_{{ luci_app_frpc_version_latest.stdout }}_all.ipk
+  when: luci_app_frpc_version_installed.stdout != luci_app_frpc_version_latest.stdout
+
+- name: Install luci-app-frpc ipk
+  command: opkg install /tmp/luci-app-frpc_{{ luci_app_frpc_version_latest.stdout }}_all.ipk
+  when: luci_app_frpc_version_installed.stdout != luci_app_frpc_version_latest.stdout

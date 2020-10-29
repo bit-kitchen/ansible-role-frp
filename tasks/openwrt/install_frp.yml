@@ -1,0 +1,11 @@
+---
+- name: Download {{ component }} ipk
+  shell: wget '{{ frp_release_url }}' -O '/tmp/{{ frp_release_name }}.ipk'
+  args:
+    creates: /tmp/{{ frp_release_name }}.ipk
+  with_items:
+  - '{{ component }}'
+
+- name: Install {{ component }} ipk
+  command: opkg install /tmp/{{ frp_release_name }}.ipk
+  register: frp_install

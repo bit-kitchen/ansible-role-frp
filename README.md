@@ -7,7 +7,7 @@ ansible-role-frp
 [![Ansible Role: bit_kitchen.frps](https://img.shields.io/ansible/role/47389.svg)](https://galaxy.ansible.com/bit_kitchen/frps)
 [![Build Status: bit-kitchen/frps](https://travis-ci.org/bit-kitchen/frps.svg?branch=master)](https://travis-ci.org/bit-kitchen/frps)
 
-Install and configure [frp](https://github.com/fatedier/frp) client or server.
+Install and configure [frp](https://github.com/fatedier/frp) client or server on Windows, Linux or OpenWrt.
 
     ansible-galaxy install bit_kitchen.frpc
     ansible-galaxy install bit_kitchen.frps
@@ -54,6 +54,7 @@ Dependencies
 ------------
 
 * `bit_kitchen.nssm`: (Required for Windows only) used for service creation on Windows.
+* `gekmihesg.openwrt`: (Required for OpenWrt only) used to support OpenWrt without Python.
 * `kewlfft.aur`: (Required for Arch Linux only) used for AUR support.
 
 Example Playbook

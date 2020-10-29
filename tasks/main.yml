@@ -15,3 +15,7 @@
   when:
   - ansible_system is defined
   - ansible_system == 'Win32NT' or ansible_system.startswith('CYGWIN')
+
+- name: Include OpenWrt Tasks
+  include_tasks: openwrt/main.yml
+  when: ansible_os_family == 'OpenWRT'

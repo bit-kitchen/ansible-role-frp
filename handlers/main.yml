@@ -24,3 +24,13 @@
   win_service:
     name: '{{ frps_service_name }}'
     state: restarted
+
+# OpenWrt
+- name: uci commit
+  uci:
+    command: commit
+
+- name: openwrt restart frpc
+  service:
+    name: frpc
+    state: restarted

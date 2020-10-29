@@ -1,0 +1,43 @@
+---
+- name: Include OpenWrt variables
+  include_vars: openwrt.yml
+
+- name: Get architecture
+  shell: . /etc/openwrt_release; echo $DISTRIB_ARCH
+  register: architecture
+  changed_when: no
+  check_mode: no
+
+- name: Check {{ frp }} installed version
+  shell: "opkg info {{ frp }} | grep Version: | cut -d' ' -f2"
+  register: frp_version_installed
+  changed_when: no
+  failed_when: no
+
+- name: Check frp latest version
+  shell: wget -O- 'http://api.github.com/repos/kuoruan/openwrt-frp/releases/latest' |
+    grep -Eo '"tag_name":"[^"]+"' |
+    grep -Eo '[-0-9.]+'
+  register: frp_version_latest
+  changed_when: no
+  when: frp_version == ""
+
+- name: Set frp latest version
+  set_fact:
+    frp_version: '{{ frp_version_latest.stdout }}'
+  when: frp_version == ""
+
+- name: frp info
+  include_tasks: ../frp_info.yml
+
+- name: Include {{ frp }} installation
+  include: install_frp.yml component={{ frp }}
+  when: frp_outdated
+
+- name: Include luci-app-frpc installation
+  include: install_luci_app_frpc.yml
+  when: frp == 'frpc'
+
+- name: Include frpc configuration
+  include: configure_frpc.yml
+  when: frp == 'frpc'
