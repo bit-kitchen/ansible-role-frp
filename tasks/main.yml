@@ -1,21 +1,3 @@
 ---
-- name: Include Archlinux Tasks
-  include_tasks: archlinux/main.yml
-  when: ansible_os_family == 'Archlinux'
-
-- name: Include Linux Tasks
-  include_tasks: linux/main.yml
-  when:
-  - ansible_os_family != 'Archlinux'
-  - ansible_system is defined
-  - ansible_system == 'Linux'
-
-- name: Include Windows Tasks
-  include_tasks: windows/main.yml
-  when:
-  - ansible_system is defined
-  - ansible_system == 'Win32NT' or ansible_system.startswith('CYGWIN')
-
-- name: Include OpenWrt Tasks
-  include_tasks: openwrt/main.yml
-  when: ansible_os_family == 'OpenWRT'
+- name: Include tasks for {{ frp_os|trim }}
+  include_tasks: "{{ frp_os|trim }}/main.yml"

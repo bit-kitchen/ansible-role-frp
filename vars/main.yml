@@ -1,11 +1,15 @@
 ---
 frp: "{{ 'frpc' if role_name.endswith('frpc') else 'frps' }}"
-
-# ansible_system: Linux, Win32NT, CYGWIN_NT-10.0-18363
-frp_system_map:
-  Linux: linux
-  Win32NT: windows
-frp_os: "{{ frp_system_map[ansible_system] if not ansible_system.startswith('CYGWIN') else 'windows' }}"
+frp_os: >
+  {% if ansible_os_family == 'Archlinux' %}
+    archlinux
+  {% elif ansible_os_family == 'OpenWRT' %}
+    openwrt
+  {% elif ansible_system == 'Linux' %}
+    linux
+  {% elif ansible_system == 'Win32NT' or ansible_system.startswith('CYGWIN') %}
+    windows
+  {% endif %}
 
 # ansible_architecture: x86_64, 64-bit
 frp_architecture_map:
