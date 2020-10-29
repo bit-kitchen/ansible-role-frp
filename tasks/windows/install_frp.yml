@@ -48,3 +48,5 @@
   win_service:
     name: '{{ component }}'
     start_mode: manual
+  # When config name is set, a dedicated service will be created later.
+  when: frp_config_name != ''

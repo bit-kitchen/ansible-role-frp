@@ -37,6 +37,7 @@
 
 - name: Include {{ frp }} installation
   include: install_frp.yml component={{ frp }}
+  when: frp_outdated
 
 - name: Include {{ frp }} configuration
   include: configure_frp.yml component={{ frp }}
