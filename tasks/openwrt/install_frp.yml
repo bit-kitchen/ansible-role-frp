@@ -7,5 +7,5 @@
   - '{{ component }}'
 
 - name: Install {{ component }} ipk
-  command: opkg install /tmp/{{ frp_release_name }}.ipk
+  shell: opkg install /tmp/{{ frp_release_name }}.ipk && rm /tmp/{{ frp_release_name }}.ipk
   register: frp_install
