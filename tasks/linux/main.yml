@@ -12,7 +12,7 @@
   uri:
     url: https://api.github.com/repos/fatedier/frp/releases/latest
   environment:
-    https_proxy: '{{ frpc_http_proxy|default("") }}'
+    https_proxy: '{{ frpc_http_proxy|default(omit) }}'
   register: frp_version_latest
   when: frp_version == ""
 
@@ -25,7 +25,7 @@
     src: "{{ frp_release_url }}"
     dest: "{{ frp_tmp_dir }}"
   environment:
-    https_proxy: '{{ frpc_http_proxy|default("") }}'
+    https_proxy: '{{ frpc_http_proxy|default(omit) }}'
   when: frp_outdated
 
 - name: Include {{ frp }} installation
